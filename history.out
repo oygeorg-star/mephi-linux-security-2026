@@ -1,0 +1,39 @@
+    1  dnf install git procps-ng findutils libcap shadow-utils
+    2  mkdir -p /srv/mephi-linux-security-2026
+    3  ks -ld /srv/mephi-linux-security-2026/
+    4  ls -ld /srv/mephi-linux-security-2026/
+    5  mkdir -p /mephi-linux-security-2026
+    6  ls -ld /mephi-linux-security-2026/
+    7  getnet passwd user1
+    8  getent passwd user1
+    9  getent passwd 1234
+   10  groupadd students
+   11  useradd -m -u 1234 -G students user1
+   12  passwd user1
+   13  ps -eo pid,ruid,euid,comm > /processes.out
+   14  grep passwd /processes.out
+   15  cp /usr/bin/chown /home/user1/chown-suid
+   16  chown root:root /home/user1/chown-suid 
+   17  chmod 4755 /home/user1/chown-suid 
+   18  touch /home/user1/test-suid.txt
+   19  chown root:root /home/user1/test-suid.txt 
+   20  su - user1
+   21  stat /home/user1/chown-suid >> /stat.out 
+   22  cp /usr/bin/chown /home/user1/chown-cap
+   23  chown root:root /home/user1/chown-cap
+   24  chmod 755 /home/user1/chown-cap 
+   25  setcap cap_chown+ep /home/user1/chown-cap 
+   26  getcap /home/user1/chown-cap 
+   27  touch /home/user1/test-cap.txt
+   28  chown root:root /home/user1/test-cap.txt 
+   29  su - user1
+   30  getcap /home/user1/chown-cap  > /getcap.out
+   31  stat /home/user1/chown-cap >> /stat.out 
+   32  command -v date
+   33  visudo -f /etc/sudoers
+   34  su - user1
+   35  cp /etc/sudoers /sudoes.out
+   36  ls -l /sudoes.out 
+   37  cat /sudoes.out 
+   38  ls -l /
+   39  history > /history.out
